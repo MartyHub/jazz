@@ -1,0 +1,14 @@
+language: java
+
+jdk:
+ - oraclejdk7
+
+branches:
+ only:
+  - master
+
+script:
+ - mvn -P shippable test
+
+after_success:
+ - mvn -P shippable clean cobertura:cobertura
