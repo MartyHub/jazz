@@ -20,7 +20,7 @@ import java.util.Set;
 
 class JazzExtension implements Extension {
 
-    private Set<ArgumentBean> beans;
+    private Set<ArgumentBean<?>> beans;
 
     private Iterable<Argument> arguments;
 
@@ -39,6 +39,7 @@ class JazzExtension implements Extension {
         this.arguments = new ArrayArgumentProvider(arguments);
     }
 
+    @SuppressWarnings("unchecked")
     void processInjectionPoint(@Observes ProcessInjectionPoint event, BeanManager beanManager) {
         InjectionPoint injectionPoint = event.getInjectionPoint();
 
@@ -54,7 +55,7 @@ class JazzExtension implements Extension {
     }
 
     void afterBeanDiscovery(@Observes AfterBeanDiscovery event) {
-        for (ArgumentBean bean : beans) {
+        for (ArgumentBean<?> bean : beans) {
             event.addBean(bean);
         }
     }

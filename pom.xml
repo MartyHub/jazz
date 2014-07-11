@@ -30,6 +30,9 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.1</version>
                     <configuration>
+                        <compilerArgs>
+                            <arg>-Xlint:unchecked</arg>
+                        </compilerArgs>
                         <encoding>UTF-8</encoding>
                         <source>1.7</source>
                         <target>1.7</target>

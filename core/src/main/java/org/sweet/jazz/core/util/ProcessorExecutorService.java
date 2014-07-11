@@ -47,7 +47,7 @@ public class ProcessorExecutorService<R> {
                 } catch (Exception e) {
                     pw.failed(e.getMessage(), e);
 
-                    return ProcessorReport.failure(e);
+                    return ProcessorReport.<R>failure(e);
                 }
             }
         });
@@ -58,7 +58,7 @@ public class ProcessorExecutorService<R> {
     public ProcessorReport<List<R>> getReport() throws InterruptedException, ExecutionException {
         executorService.shutdown();
 
-        ProcessorReport.MergeBuilder reportBuilder = new ProcessorReport.MergeBuilder(count);
+        ProcessorReport.MergeBuilder<R> reportBuilder = new ProcessorReport.MergeBuilder<R>(count);
 
         while (count > 0) {
             final Future<ProcessorReport<R>> future = executorCompletionService.take();

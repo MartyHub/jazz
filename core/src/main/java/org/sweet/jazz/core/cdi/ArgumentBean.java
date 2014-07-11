@@ -111,7 +111,7 @@ public class ArgumentBean<T> implements Bean<T> {
 
         injectionTarget.inject(instance, creationalContext);
 
-        new BeanArgumentsIntrospector(new StringTransformerRegistryBuilder().withAll()
+        new BeanArgumentsIntrospector<T>(new StringTransformerRegistryBuilder().withAll()
                 .build(), beanClass).fill(instance, arguments);
 
         injectionTarget.postConstruct(instance);

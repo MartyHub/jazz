@@ -12,32 +12,32 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProcessorReport<R> {
 
-    public static final ProcessorReport success(String message) {
-        return new ProcessorReport(ProcessorStatus.OK, message, null, null);
+    public static final <R> ProcessorReport<R> success(String message) {
+        return new ProcessorReport<R>(ProcessorStatus.OK, message, null, null);
     }
 
     public static final <R> ProcessorReport<R> success(String message, R result) {
         return new ProcessorReport<R>(ProcessorStatus.OK, message, result, null);
     }
 
-    public static final ProcessorReport cancel(String message) {
-        return new ProcessorReport(ProcessorStatus.CANCEL, message, null, null);
+    public static final <R> ProcessorReport<R> cancel(String message) {
+        return new ProcessorReport<R>(ProcessorStatus.CANCEL, message, null, null);
     }
 
-    public static final ProcessorReport failure(String message) {
-        return new ProcessorReport(ProcessorStatus.ERROR, message, null, null);
+    public static final <R> ProcessorReport<R> failure(String message) {
+        return new ProcessorReport<R>(ProcessorStatus.ERROR, message, null, null);
     }
 
-    public static final ProcessorReport failure(String message, Exception cause) {
-        return new ProcessorReport(ProcessorStatus.ERROR, message, null, cause);
+    public static final <R> ProcessorReport<R> failure(String message, Exception cause) {
+        return new ProcessorReport<R>(ProcessorStatus.ERROR, message, null, cause);
     }
 
-    public static final ProcessorReport failure(Exception cause) {
+    public static final <R> ProcessorReport<R> failure(Exception cause) {
         if (cause == null) {
             throw new NullPointerException();
         }
 
-        return new ProcessorReport(ProcessorStatus.ERROR, cause.getMessage(), null, cause);
+        return new ProcessorReport<R>(ProcessorStatus.ERROR, cause.getMessage(), null, cause);
     }
 
     public static final MergeBuilder merge(final int size) {
