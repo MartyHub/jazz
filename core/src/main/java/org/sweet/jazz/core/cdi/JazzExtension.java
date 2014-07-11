@@ -27,7 +27,7 @@ class JazzExtension implements Extension {
     void beforeBeanDiscovery(@Observes BeforeBeanDiscovery event) {
         this.beans = new HashSet<>();
 
-        String[] args = StartMain.getParameters();
+        String[] args = StartMain.PARAMETERS;
         String[] arguments = null;
 
         if (args != null && args.length > 2) {
