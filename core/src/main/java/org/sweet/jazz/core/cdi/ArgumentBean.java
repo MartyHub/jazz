@@ -76,10 +76,13 @@ public class ArgumentBean<T> implements Bean<T> {
         Set<Annotation> qualifiers = new HashSet<Annotation>(3);
 
         qualifiers.add(new AnnotationLiteral<Default>() {
+
         });
         qualifiers.add(new AnnotationLiteral<Any>() {
+
         });
         qualifiers.add(new AnnotationLiteral<Arguments>() {
+
         });
 
         return qualifiers;
@@ -111,8 +114,7 @@ public class ArgumentBean<T> implements Bean<T> {
 
         injectionTarget.inject(instance, creationalContext);
 
-        new BeanArgumentsIntrospector<T>(new StringTransformerRegistryBuilder().withAll()
-                .build(), beanClass).fill(instance, arguments);
+        new BeanArgumentsIntrospector<T>(new StringTransformerRegistryBuilder().withAll().build(), beanClass).builder(arguments).withBean(instance).build();
 
         injectionTarget.postConstruct(instance);
 

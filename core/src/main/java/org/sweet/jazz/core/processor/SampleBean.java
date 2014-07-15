@@ -1,9 +1,13 @@
 package org.sweet.jazz.core.processor;
 
-import org.sweet.bumblebee.Optional;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
 
 public class SampleBean {
 
+    @NotNull
+    @NotBlank
     private String name;
 
     public SampleBean() {
@@ -17,7 +21,6 @@ public class SampleBean {
         return name;
     }
 
-    @Optional
     public void setName(String name) {
         this.name = name;
     }

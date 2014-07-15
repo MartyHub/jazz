@@ -10,8 +10,10 @@ import org.sweet.jazz.core.util.ProcessorExecutorService;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.New;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.Null;
 import java.util.List;
 
 @Named
@@ -35,14 +37,12 @@ public class MultiThreadSampleProcessor implements Processor<List<String>> {
 
     @Override
     public ProcessorReport<List<String>> process() throws Exception {
-        ProcessorExecutorService<String> processorExecutorService = new ProcessorExecutorService<>(activity, multiThreadBean,
-                multiThreadSampleBean.getNames().length);
+        ProcessorExecutorService<String> processorExecutorService = new ProcessorExecutorService<>(activity, multiThreadBean, multiThreadSampleBean.getNames().length);
 
         for (String name : multiThreadSampleBean.getNames()) {
             final SampleBeanProcessor processor = instance.get();
 
-            processor.getSampleBean()
-                    .setName(name);
+            processor.getSampleBean().setName(name);
 
             processorExecutorService.submit(processor);
         }
